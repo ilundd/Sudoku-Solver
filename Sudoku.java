@@ -12,7 +12,26 @@ public class Sudoku {
 	
 	private static int[] recentNumber = {0, 0};
 	private static int   printCount = 0;
-	
+
+	public static void main(String[] args) {
+		if(args[0].equals("-t")) {
+			testIsFullSolution();
+			testReject();
+			testExtend();
+			testNext();
+		} else {
+			int[] coords = new int[2];
+			int[][] board = readBoard(args[0]);
+			printBoard(board);
+			System.out.println("Solution:");
+			int[][] solvedBoard = solve(board, coords);
+			if (solvedBoard == null)
+				System.out.println("Board not solvable!");
+			else
+				printBoard(solvedBoard);
+		}
+	}
+
 	static boolean isFullSolution(int[][] board) {
 		
 		// looks for empty cells
@@ -459,23 +478,6 @@ public class Sudoku {
 		return null;
 	}
 
-	public static void main(String[] args) {
-		if(args[0].equals("-t")) {
-			testIsFullSolution();
-			testReject();
-			testExtend();
-			testNext();
-		} else {
-			int[] coords = new int[2];
-			int[][] board = readBoard(args[0]);
-			printBoard(board);
-			System.out.println("Solution:");
-			int[][] solvedBoard = solve(board, coords);
-			if (solvedBoard == null)
-				System.out.println("Board not solvable!");
-			else
-				printBoard(solvedBoard);
-		}
-	}
+
 }
 
